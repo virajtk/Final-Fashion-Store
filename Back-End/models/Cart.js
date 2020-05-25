@@ -12,62 +12,48 @@ const cartSchema = new mongoose.Schema({
     username: {
         type: String
     },
-    email: {
-        type: Number,
-        required: true
-    },
     address: {
-        type: Number,
-        default: 0
+        type: String
     },
     address2: {
-        type: Number,
-        default: 0
-    },
-    country: {
-        type: String,
-        required: true
+        type: String
     },
     zip: {
-        type: String,
-        required: true
-    },
-    same_address: {
         type: String
     },
-    save_info: {
+    state: {
         type: String
     },
-    credit: {
+    productName:{
         type: String
     },
-    debit: {
-        type: String
-    },
-    paypal: {
-        type: String
-    },
+    // credit: {
+    //     type: Boolean
+    // },
+    // debit: {
+    //     type: Boolean
+    // },
+    // paypal: {
+    //     type: Boolean
+    // },
     cc_name: {
         type: String
     },
     cc_number: {
-        type: String
+        type: Number
     },
     cc_cvv: {
         type: String
     },
-    cc_expiration: {
-        type: String
-    },
-    selectedProduct: {
-        type: String
-    },
-    cartItems: {
-        type: String
-    },
-    totalValue: {
-        type: String
-    },
+    // cc_expiration: {
+    //     type: Date
+    // },
+    // cartItems: {
+    //     type: array
+    // },
+    // totalValue: {
+    //     type: Number
+    // },
 
 
 });
