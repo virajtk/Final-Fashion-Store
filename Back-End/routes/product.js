@@ -39,6 +39,17 @@ router.get('/findProductType/:mainCategory', async (req,res) => {
 
 });
 
+
+// Getting Last Added Product
+router.get('/latest', async (req,res) => {
+    try{
+        const latestProduct = await Product.findOne()
+        res.json(latestProduct)
+    } catch (err) {
+        res.status(500).json({ message: err.message })
+    }
+})
+
 // Getting Selected Product
 router.get('/findByMainCategory/:mainCategory', async (req,res) => {
 
@@ -173,6 +184,15 @@ router.patch('/:id', getProduct , async (req,res) => {
         res.status(400).json({ message: err.message })
     }
 })
+
+// Update One Using PUT
+router.put('/:id', function(req,res,next){
+    Product.findByIdAndUpdate({_id:req.params.id},req.body).then(function(){
+        Product.findOne({_id:req.params.id}).then(function(Product){
+            res.send(Product);
+        })
+    });
+});
 
 // Deleting One
 router.delete('/:id', getProduct , async (req,res) => {

@@ -29,15 +29,15 @@ router.post('/', async (req,res) => {
         address2: req.body.address2,
         zip: req.body.zip,
         state:req.body.state,
-        credit: req.body.credit,
-        debit: req.body.debit,
-        paypal: req.body.paypal,
+        // credit: req.body.credit,
+        // debit: req.body.debit,
+        // paypal: req.body.paypal,
         cc_name: req.body.cc_name,
         cc_number: req.body.cc_number,
         cc_cvv: req.body.cc_cvv,
-        cc_expiration: req.body.cc_expiration,
-        productName: req.body.productName,
-        totalValue: req.body.totalValue,
+        // cc_expiration: req.body.cc_expiration,
+        // productName: req.body.productName,
+        // totalValue: req.body.totalValue,
 
     })
 
@@ -72,33 +72,33 @@ router.patch('/:id', getCart , async (req,res) => {
     if (req.body.state != null) {
         res.cart.state = req.body.state
     }
-    if (req.body.credit != null) {
-        res.cart.credit = req.body.credit
-    }
-    if (req.body.debit != null) {
-        res.cart.debit = req.body.debit
-    }
-    if (req.body.paypal != null) {
-        res.cart.paypal = req.body.paypal
-    }
-    if (req.body.cc_name != null) {
-        res.cart.cc_name = req.body.cc_name
-    }
-    if (req.body.cc_number != null) {
-        res.cart.cc_number = req.body.cc_number
-    }
-    if (req.body.cc_cvv != null) {
-        res.cart.cc_cvv = req.body.cc_cvv
-    }
-    if (req.body.cc_expiration != null) {
-        res.cart.cc_expiration = req.body.cc_expiration
-    }
-    if (req.body.productName != null) {
-        res.cart.productName = req.body.productName
-    }
-    if (req.body.totalValue != null) {
-        res.cart.totalValue = req.body.totalValue
-    }
+    // if (req.body.credit != null) {
+    //     res.cart.credit = req.body.credit
+    // }
+    // if (req.body.debit != null) {
+    //     res.cart.debit = req.body.debit
+    // }
+    // if (req.body.paypal != null) {
+    //     res.cart.paypal = req.body.paypal
+    // }
+    // if (req.body.cc_name != null) {
+    //     res.cart.cc_name = req.body.cc_name
+    // }
+    // if (req.body.cc_number != null) {
+    //     res.cart.cc_number = req.body.cc_number
+    // }
+    // if (req.body.cc_cvv != null) {
+    //     res.cart.cc_cvv = req.body.cc_cvv
+    // }
+    // if (req.body.cc_expiration != null) {
+    //     res.cart.cc_expiration = req.body.cc_expiration
+    // }
+    // if (req.body.productName != null) {
+    //     res.cart.productName = req.body.productName
+    // }
+    // if (req.body.totalValue != null) {
+    //     res.cart.totalValue = req.body.totalValue
+    // }
     try {
         const updatedCart = await res.cart.save()
         res.status(200).json(updatedCart)

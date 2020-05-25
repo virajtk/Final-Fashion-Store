@@ -1,28 +1,50 @@
 import React, {Component} from 'react';
-import Product from "../../img/product/8.jpg";
 import {toast, ToastContainer} from "react-toastify";
+import Product from "../../img/product/8.jpg";
+import {Redirect} from "react-router-dom";
 
-class AddProduct extends Component {
-
+class EditProduct extends Component {
     constructor(props) {
         super(props);
 
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleUpdateSubmit = this.handleUpdateSubmit.bind(this);
         this.onChangeMainCategory = this.onChangeMainCategory.bind(this);
 
         this.state = {
-            mainCategory: '',
-            productType: '',
-            productName: '',
-            description: '',
-            price: '',
-            discount:'',
-            discountPrice:'',
-            brand: '',
-            color: '',
-            productTypeList: []
+            mainCategory: null,
+            productType: null,
+            productName: null,
+            description: null,
+            price: null,
+            discount: null,
+            discountPrice: null,
+            brand: null,
+            color: null,
+            productTypeList: [],
+            product: [],
+            redirect: null,
         };
+    }
+
+    componentDidMount() {
+        let id = sessionStorage.getItem("selectedProductEdit:");
+        fetch("http://localhost:3000/product/" + id)
+            .then((res) => res.json())
+            .then((json) => {
+                this.setState({
+                    product: json,
+                    mainCategory: json.mainCategory,
+                    productType: json.productType,
+                    productName: json.productName,
+                    description: json.description,
+                    price: json.price,
+                    discount: json.discount,
+                    discountPrice: json.discountPrice,
+                    brand: json.brand,
+                    color: json.color,
+                });
+            });
     }
 
     handleChange = (event) => {
@@ -33,6 +55,11 @@ class AddProduct extends Component {
         });
     };
 
+    handleUpdateSubmit = (event) => {
+        event.preventDefault();
+        this.postEditData();
+
+    };
 
     onChangeMainCategory = (event) =>{
         this.setState({
@@ -56,15 +83,15 @@ class AddProduct extends Component {
         });
     }
 
-
-    async postData() {
+    postEditData() {
         try {
             if(this.state.discount){
                 this.state.discountPrice = this.state.price - this.state.price * (this.state.discount/100);
 
             }
-            let result = await fetch('http://localhost:3000/product/addproduct', {
-                method: 'post',
+            let id = sessionStorage.getItem("selectedProductEdit:");
+            let result =  fetch('http://localhost:3000/product/'+id, {
+                method: 'put',
                 headers: {
                     'Accept': 'application/json',
                     'Content-type': 'application/json',
@@ -81,7 +108,7 @@ class AddProduct extends Component {
                     "color": this.state.color,
                 })
             });
-            toast.success("Product Added Successfully !", {
+            toast.success("Product Updated Successfully !", {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -91,22 +118,20 @@ class AddProduct extends Component {
                 progress: undefined,
             });
 
-            console.log('Result: '+ result);
+            setTimeout(function() {
+                this.setState({redirect: "/productlist"})
+            }.bind(this), 3000)
 
         } catch (error) {
             console.log(error.message);
         }
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault();
-        this.postData();
-
-    };
-
 
     render() {
-
+        if(this.state.redirect){
+            return <Redirect to={this.state.redirect} />;
+        }
         return (
             <div>
                 <ToastContainer />
@@ -115,9 +140,9 @@ class AddProduct extends Component {
                         <div className="card">
                             <div className="card-body">
                                 <div>
-                                    <h4 className="header-title">Add New Product</h4>
+                                    <h4 className="header-title">Update Product</h4>
                                 </div>
-                                <form onSubmit={this.handleSubmit} autoComplete="off">
+                                <form onSubmit={this.handleUpdateSubmit} autoComplete="off">
                                     <div className="row">
                                         <div className="col-md-8">
                                             <div className="form-group">
@@ -156,12 +181,12 @@ class AddProduct extends Component {
                                             <div className="form-group">
                                                 <label htmlFor="exampleInputEmail1">Product Name</label>
                                                 <input
-                                                       type="text"
-                                                       className="form-control style-input"
-                                                       placeholder="Product Name"
-                                                       name="productName"
-                                                       value={this.state.productName}
-                                                       onChange={this.handleChange}
+                                                    type="text"
+                                                    className="form-control style-input"
+                                                    placeholder="Product Name"
+                                                    name="productName"
+                                                    value={this.state.productName}
+                                                    onChange={this.handleChange}
                                                 />
                                                 <small id="emailHelp" className="form-text text-muted">This category should be related to the main category.</small>
                                             </div>
@@ -226,14 +251,14 @@ class AddProduct extends Component {
                                         </div>
                                         <div className="col-md-4">
                                             <div className="col-lg-12 col-sm-6">
-                                            <div className="product-item">
-                                                <div className="pi-pic">
-                                                    <img src={Product} alt="product" />
+                                                <div className="product-item">
+                                                    <div className="pi-pic">
+                                                        <img src={Product} alt="product" />
+                                                    </div>
+                                                    <div className="pi-text fashion-buttons upload-btn">
+                                                        <button type="submit" className="btn fashion-btn ">Upload</button>
+                                                    </div>
                                                 </div>
-                                                <div className="pi-text fashion-buttons upload-btn">
-                                                    <button type="submit" className="btn fashion-btn ">Upload</button>
-                                                </div>
-                                            </div>
                                             </div>
                                         </div>
                                     </div>
@@ -247,4 +272,4 @@ class AddProduct extends Component {
     }
 }
 
-export default AddProduct;
+export default EditProduct;
