@@ -1,18 +1,36 @@
 import React, {Component} from 'react';
 
+
 class Wishlist extends Component {
     constructor(props) {
         super(props);
-        // this.handleSubmit = this.handleSubmit.bind(this);
-        // this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
 
         this.state = {
             selectedProduct: [],
             isLoaded: false,
-            totalValue : 0.0,
+            totalValue : 1249.00,
+            productName : '' ,
+            discountPrice: '',
+
         };
 
     }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        // alert(JSON.stringify(this.state));
+        this.postData();
+    };
+
+    handleChange = (e) => {
+        const { name, value } = e.target;
+
+        this.setState({
+            [name]: value,
+        });
+    };
     componentDidMount() {
         let id=  sessionStorage.getItem("productID:");
         fetch('http://localhost:3000/product/'+id)
@@ -51,11 +69,11 @@ class Wishlist extends Component {
                             <ul className="list-group mb-3 sticky-top">
 
                                     <li className="list-group-item d-flex justify-content-between lh-condensed">
-                                        <div>
-                                            <h6 className="my-0">Product One</h6>
+                                        <div key={selectedProduct._id}>
+                                            <h6 className="my-0" name="productName" onChange={this.handleChange} value={this.state.productName}>{selectedProduct.productName}</h6>
                                             {/*<small className="text-muted">Brief description</small>*/}
                                         </div>
-                                        <span className="text-muted">LKR.1055.00</span>
+                                        <span className="text-muted">LKR.{selectedProduct.discountPrice}</span>
                                     </li>
 
                                 <li className="list-group-item d-flex justify-content-between lh-condensed">
