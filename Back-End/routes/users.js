@@ -14,7 +14,7 @@ router.get('/', async (req,res) => {
 
 // Getting One
 router.get('/:id', getUser , (req,res) => {
-    res.json(res.User)
+    res.json(res.user)
 })
 
 // Creating One
@@ -61,10 +61,19 @@ router.patch('/:id', getUser , async (req,res) => {
     }
 })
 
+// Update One Using PUT
+router.put('/:id', function(req,res,next){
+    User.findByIdAndUpdate({_id:req.params.id},req.body).then(function(){
+        User.findOne({_id:req.params.id}).then(function(user){
+            res.send(user);
+        })
+    });  
+});
+
 // Deleting One
 router.delete('/:id', getUser , async (req,res) => {
     try{
-        await res.User.remove()
+        await res.user.remove()
         res.status(200).json({message: 'Deleted  User'})
     } catch (err) {
         res.status(500).json({message : err.message})
@@ -72,19 +81,18 @@ router.delete('/:id', getUser , async (req,res) => {
 })
 
 async function getUser (req, res, next) {
-    let User
+    let user
     try {
-        User = await User.findById(req.params.id)
-        if ( User == null ) {
+        user = await User.findById(req.params.id)
+        if ( user == null ) {
             return res.status(404).json({ message: 'Cannot find User' })
         }
     } catch (err) {
         return res.status(500).json({ message : err.message})
     }
 
-    res.User = User
+    res.user = user
     next()
 }
-
 
 module.exports = router
