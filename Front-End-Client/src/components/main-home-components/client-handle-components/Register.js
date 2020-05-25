@@ -51,9 +51,9 @@ class Register extends Component {
                 draggable: true,
                 progress: undefined,
               });
-              //setTimeout(function() { //Start the timer
-                //this.setState({ redirect: "/login" });//After 3 second, set redirect to true
-             // }.bind(this), 3000)
+              setTimeout(function() { //Start the timer
+                this.setState({ redirect: "/login" });//After 3 second, set redirect to true
+             }.bind(this), 3000)
             //this.setState({redirect: "/AddAccount"});
             }catch(error){
             console.log(error.message);
@@ -78,9 +78,9 @@ class Register extends Component {
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]*/}
                 {/* preloader area start */}
-                <div id="preloader">
+                {/* <div id="preloader">
                     <div className="loader" />
-                </div>
+                </div> */}
                 {/* preloader area end */}
                 {/* login area start */}
                 <div className="login-area register-bg">
@@ -176,7 +176,7 @@ class Register extends Component {
                                                 <button id="form_submit" type="submit">Submit <i className="ti-arrow-right" /></button>
                                             </div>
                                             <div className="form-footer text-center mt-5">
-                                                <p className="text-muted">Don't have an account? <a href="">Sign in</a></p>
+                                                <p className="text-muted">Don't have an account? <a href="/login">Sign in</a></p>
                                             </div>
                                         </div>
                                     </form>
