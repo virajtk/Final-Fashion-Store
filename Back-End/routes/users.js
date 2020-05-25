@@ -23,7 +23,6 @@ router.post('/', async (req,res) => {
         fullName: req.body.fullName,
         userName: req.body.userName,
         email: req.body.email,
-        role: req.body.role,
         contactNo: req.body.contactNo,
         password: req.body.password,
         confirmPassword: req.body.confirmPassword
@@ -46,9 +45,7 @@ router.patch('/:id', getUser , async (req,res) => {
     }
     if (req.body.password != null) {
         res.User.password = req.body.password
-    }
-    if (req.body.role != null) {
-        res.User.role = req.body.role
+ 
     }
     if (req.body.email != null) {
         res.User.email = req.body.email

@@ -1,10 +1,17 @@
 import React, {Component} from 'react';
 import { Redirect } from "react-router-dom";
+import {toast, ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class Register extends Component {
 
     constructor(props) {
         super(props);
+
+        //this.handleChange = this.handleChange.bind(this);
+        //this.handleSubmit = this.handleSubmit.bind(this);
+       // this.onChangeMainCategory = this.onChangeMainCategory.bind(this);
+
         this.state = {
             fullName: "",
             userName: "",
@@ -35,6 +42,18 @@ class Register extends Component {
                 body: JSON.stringify(this.state),
             });
             console.log("Result: " + result);
+            toast.success("✔️ Account Added Susseccfully !", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+              //setTimeout(function() { //Start the timer
+                //this.setState({ redirect: "/login" });//After 3 second, set redirect to true
+             // }.bind(this), 3000)
             //this.setState({redirect: "/AddAccount"});
             }catch(error){
             console.log(error.message);
@@ -54,6 +73,7 @@ class Register extends Component {
         }
         return (
             <div>
+                <ToastContainer />
                 {/*[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]*/}
@@ -77,37 +97,78 @@ class Register extends Component {
                                         <div className="login-form-body">
                                             <div className="form-gp">
                                                 <label htmlFor="exampleInputName1">Full Name</label>
-                                                <input type="text" id="exampleInputName1" />
+                                                <input
+                                                         type="text"
+                                                         id="inputFullName"
+                                                         name="fullName"
+                                                         value={this.state.fullName}
+                                                         onChange={this.onChangeHandler}
+                                                         required
+                                                />
                                                 <i className="ti-user" />
                                                 <div className="text-danger" />
                                             </div>
                                             <div className="form-gp">
                                                 <label htmlFor="exampleInputUsername1">Username</label>
-                                                <input type="text" id="exampleInputUsername1" />
+                                                <input
+                                                    type="userName"
+                                                    id="inputUsername"
+                                                    name="userName"
+                                                    value={this.state.userName}
+                                                    onChange={this.onChangeHandler}
+                                                     required
+                                                    />
                                                 <i className="ti-id-badge" />
                                                 <div className="text-danger" />
                                             </div>
                                             <div className="form-gp">
                                                 <label htmlFor="exampleInputEmail1">Email address</label>
-                                                <input type="email" id="exampleInputEmail1" />
+                                                <input
+                                                    type="email"
+                                                    id="inputEmail"
+                                                    name="email"
+                                                    value={this.state.email}
+                                                    onChange={this.onChangeHandler}
+                                                    required
+                                                />
                                                 <i className="ti-email" />
                                                 <div className="text-danger" />
                                             </div>
                                             <div className="form-gp">
                                                 <label htmlFor="exampleInputContactNo1">Contact No</label>
-                                                <input type="text" id="exampleInputContactNo1" />
+                                                <input
+                                                     type="number"
+                                                     id="inputContactNo"
+                                                     name="contactNo"
+                                                     value={this.state.contactNo}
+                                                     onChange={this.onChangeHandler}
+                                                />
                                                 <i className="ti-mobile" />
                                                 <div className="text-danger" />
                                             </div>
                                             <div className="form-gp">
                                                 <label htmlFor="exampleInputPassword1">Password</label>
-                                                <input type="password" id="exampleInputPassword1" />
+                                                <input
+                                                    type="password"
+                                                     id="inputPassword"
+                                                    name="password"
+                                                    value={this.state.password}
+                                                    onChange={this.onChangeHandler}
+                                                    required
+                                                />
                                                 <i className="ti-lock" />
                                                 <div className="text-danger" />
                                             </div>
                                             <div className="form-gp">
                                                 <label htmlFor="exampleInputPassword2">Confirm Password</label>
-                                                <input type="password" id="exampleInputPassword2" />
+                                                <input
+                                                    type="password"
+                                                    id="inputConfirmPassword"
+                                                    name="confirmPassword"
+                                                    value={this.state.confirmPassword}
+                                                    onChange={this.onChangeHandler}
+                                                    required
+                                                    />
                                                 <i className="ti-lock" />
                                                 <div className="text-danger" />
                                             </div>
