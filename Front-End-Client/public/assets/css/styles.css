@@ -3590,15 +3590,9 @@ table.dataTable thead td {
     background: #f51167;
     border-radius: 5px;
 }
-
-/*::-webkit-scrollbar-thumb:hover{*/
-/*    background: #f41226;*/
-
-/*}*/
-
 .rate-popup{
-    margin-right: 23%;
-    margin-left: 23%;
+    margin-right: 22%;
+    margin-left: 22%;
     text-align: center;
     font-weight: bold;
     font-size: large;

@@ -15,8 +15,7 @@ class ProductList extends Component {
     handleDeleteProduct = (product) => {
         try {
             fetch('http://localhost:3000/product/' + product._id, {method: "delete"})
-            this.componentDidMount();
-            this.componentDidMount();
+
             toast.success("Product Deleted Successfully !", {
                 position: "top-right",
                 autoClose: 3000,
@@ -27,10 +26,18 @@ class ProductList extends Component {
                 progress: undefined,
             });
 
+            setTimeout(function() { //Start the timer
+                this.componentDidMount(); //After 1 second
+            }.bind(this), 1000)
+
         } catch (error) {
             console.log(error.message);
         }
     };
+
+    handleEditProduct = (product) => {
+        window.sessionStorage.setItem("selectedProductEdit:", product._id);
+    }
 
     componentDidMount = () => {
         fetch("http://localhost:3000/product/all")
@@ -110,7 +117,7 @@ class ProductList extends Component {
                                                         </td>
                                                         <td>
                                                             <ul className="d-flex justify-content-center">
-                                                                <li className="mr-3"><a className="text-secondary"><i className="fa fa-edit" /></a></li>
+                                                                <li onClick={this.handleEditProduct.bind(this, product)}className="mr-3"><a href="/editproduct" className="text-secondary"><i className="fa fa-edit" /></a></li>
                                                                 <li onClick={() => this.handleDeleteProduct(product)}><a className="text-danger"><i className="ti-trash"/></a></li>
                                                             </ul>
                                                         </td>

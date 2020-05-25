@@ -27,15 +27,15 @@ const cartSchema = new mongoose.Schema({
     productName:{
         type: String
     },
-    // credit: {
-    //     type: Boolean
-    // },
-    // debit: {
-    //     type: Boolean
-    // },
-    // paypal: {
-    //     type: Boolean
-    // },
+    credit: {
+        type: Boolean
+    },
+    debit: {
+        type: Boolean
+    },
+    paypal: {
+        type: Boolean
+    },
     cc_name: {
         type: String
     },
@@ -45,15 +45,15 @@ const cartSchema = new mongoose.Schema({
     cc_cvv: {
         type: String
     },
-    // cc_expiration: {
-    //     type: Date
-    // },
+    cc_expiration: {
+        type: Date
+    },
     // cartItems: {
     //     type: array
     // },
-    // totalValue: {
-    //     type: Number
-    // },
+    totalValue: {
+        type: Number
+    },
 
 
 });

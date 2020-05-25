@@ -52,13 +52,12 @@ app.use("/login", loginRouter );
 
 //cart
 const cartRouter = require("./routes/cart");
-app.use("cart", cartRouter);
+app.use("/cart", cartRouter);
 
 //wishlist
 const wishlistRouter = require("./routes/wishlist");
-app.use("wishlist", wishlistRouter);
+app.use("/wishlist", wishlistRouter);
 
 app.listen(3000, () => {
     console.log('Server Started');
-
 });

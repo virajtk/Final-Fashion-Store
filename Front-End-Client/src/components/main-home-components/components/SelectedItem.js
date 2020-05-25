@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-// import Product from "../../img/single-product/1.jpg";
+import Product from "../../img/product/8.jpg";
 import ReactStars from "react-rating-stars-component";
 import {toast, ToastContainer} from "react-toastify";
 
@@ -119,8 +119,7 @@ class SelectedItem extends Component {
                         <div className="row">
                             <div className="col-lg-4">
                                 <div className="product-pic-zoom">
-                                    <img className="product-big-img" alt=""/>
-                                    {/* src={Product}  */}
+                                    <img className="product-big-img" src={Product} alt=""/>
                                 </div>
                             </div>
                             <div className="col-lg-8 product-details" key={selectedProduct._id}>
