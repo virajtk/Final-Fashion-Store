@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const Cart = require('../models/Product')
+const Cart = require('../models/Cart')
 
 
 // Getting all
-router.get('/all', async (req,res) => {
+router.get('/', async (req,res) => {
     try{
         const carts = await Cart.find()
         res.json(carts)
@@ -20,18 +20,15 @@ router.get('/:id', getCart , (req,res) => {
 
 
 // Creating One
-router.post('/checkout', async (req,res) => {
+router.post('/', async (req,res) => {
     const cart = new Cart({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         username: req.body.username,
-        email: req.body.email,
         address: req.body.address,
         address2: req.body.address2,
-        country: req.body.country,
         zip: req.body.zip,
-        same_address: req.body.same_address,
-        save_info: req.body.save_info,
+        state:req.body.state,
         credit: req.body.credit,
         debit: req.body.debit,
         paypal: req.body.paypal,
@@ -39,8 +36,7 @@ router.post('/checkout', async (req,res) => {
         cc_number: req.body.cc_number,
         cc_cvv: req.body.cc_cvv,
         cc_expiration: req.body.cc_expiration,
-        selectedProduct: req.body.selectedProduct,
-        cartItems: req.body.cartItems,
+        productName: req.body.productName,
         totalValue: req.body.totalValue,
 
     })
@@ -64,26 +60,17 @@ router.patch('/:id', getCart , async (req,res) => {
     if (req.body.username != null) {
         res.cart.username = req.body.username
     }
-    if (req.body.email != null) {
-        res.cart.email = req.body.email
-    }
     if (req.body.address != null) {
         res.cart.address = req.body.address
     }
     if (req.body.address2 != null) {
         res.cart.address2 = req.body.address2
     }
-    if (req.body.country != null) {
-        res.cart.country = req.body.country
-    }
     if (req.body.zip != null) {
         res.cart.zip = req.body.zip
     }
-    if (req.body.same_address != null) {
-        res.cart.same_address = req.body.same_address
-    }
-    if (req.body.save_info != null) {
-        res.cart.save_info = req.body.save_info
+    if (req.body.state != null) {
+        res.cart.state = req.body.state
     }
     if (req.body.credit != null) {
         res.cart.credit = req.body.credit
@@ -106,11 +93,8 @@ router.patch('/:id', getCart , async (req,res) => {
     if (req.body.cc_expiration != null) {
         res.cart.cc_expiration = req.body.cc_expiration
     }
-    if (req.body.selectedProduct != null) {
-        res.cart.selectedProduct = req.body.selectedProduct
-    }
-    if (req.body.cartItems != null) {
-        res.cart.cartItems = req.body.cartItems
+    if (req.body.productName != null) {
+        res.cart.productName = req.body.productName
     }
     if (req.body.totalValue != null) {
         res.cart.totalValue = req.body.totalValue
